@@ -6,7 +6,7 @@
   <artifactId>fangjee_generator</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
-
+ <!--代码生成器名称-->
   <name>fangjee_generator</name>
   <url>http://maven.apache.org</url>
 
