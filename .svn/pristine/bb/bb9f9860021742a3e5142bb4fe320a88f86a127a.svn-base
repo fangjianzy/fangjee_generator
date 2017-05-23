@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="${p.basePackage}.dao.${p.bizPackage}.${p.className}Dao" > 
+	<!-- Result Map-->
+   <resultMap id="BaseResultMap" type="${p.basePackage}.entity.${p.bizPackage}.${p.className}">
+	<#list p.gci_columns?sort_by("ordinal_position") as u>
+		<#if u.column_key=="PRI">
+		  <id column="${u.clumn_name}" property="${u.clumn_name}" jdbcType="${u.column_javaMybatintype?upper_case}" />
+		<#else>
+		  <result column="${u.clumn_name}" property="${u.clumn_name}" jdbcType="${u.column_javaMybatintype?upper_case}"/>
+		</#if>
+	</#list>
+	</resultMap>
+	
+	<resultMap id="PageInfoResultMap" type="com.fangjian.framework.common.PageInfo" >
+		  <result column="totalCount" property="totalCount" jdbcType="INTEGER"/>
+		  <result column="currentPage" property="currentPage" jdbcType="INTEGER"/>
+		  <result column="pageSize" property="pageSize" jdbcType="INTEGER"/>
+	</resultMap>
+	
+  <!--
+  	关于varchar类型字符串可能进行查询的Like 语句编写
+  	<if test="vo.typename != null and vo.typename !=''">
+  	    	and typename like CONCAT('%',,'%')
+  	</if>
+   -->	
+   
+  <!-- 分页数据 -->    
+  <select id="findPageListBySQL" resultMap="BaseResultMap" parameterType="${p.basePackage}.query.${p.bizPackage}.${p.className}Query">
+  		select 
+  	    <include refid="Base_Column_List" />
+  	     from ${p.table_name} where 1=1
+  	    <!-- 带条件情况，在此处添加逻辑 -->
+  	    <#list p.gci_columns?sort_by("ordinal_position") as u>
+  	    <#if u.column_javatype=="String">
+  	     <if test="vo.${u.clumn_name} != null and vo.${u.clumn_name} != ''" >
+       	 	and ${u.clumn_name} like CONCAT('%',#${"{vo."+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"},'%')
+     	 </if>
+  	    <#else>
+      	 <if test="vo.${u.clumn_name} != null" >
+       	 	and ${u.clumn_name} = #${"{vo."+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
+     	 </if>
+     	 </#if>
+      	</#list>
+      
+  		<if test="currentPage==1">
+  			limit 0, #${"{pageSize"},jdbcType=INTEGER}
+  		</if>
+  		<if test="currentPage&gt;1">
+  			limit ${"$"}${"{(currentPage-1)*pageSize"}},${"$"}${"{pageSize"}}
+  		</if>
+  </select>
+  
+  <!-- 分页属性数据 -->    
+  <select id="findPageInfoBySQL" resultMap="PageInfoResultMap" parameterType="${p.basePackage}.query.${p.bizPackage}.${p.className}Query">
+  		select 
+  	    count(${p.pk_name}) as totalCount,#${"{pageSize"},jdbcType=INTEGER} as pageSize,#${"{currentPage"},jdbcType=INTEGER} as currentPage
+  	    from ${p.table_name} where 1=1
+	    <!-- 带条件情况，在此处添加逻辑 -->
+  	    <#list p.gci_columns?sort_by("ordinal_position") as u>
+  	    <#if u.column_javatype=="String">
+  	     <if test="vo.${u.clumn_name} != null and vo.${u.clumn_name} != ''" >
+       	 	and ${u.clumn_name} like CONCAT('%',#${"{vo."+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"},'%')
+     	 </if>
+  	    <#else>
+      	 <if test="vo.${u.clumn_name} != null" >
+       	 	and ${u.clumn_name} = #${"{vo."+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
+     	 </if>
+     	 </#if>
+      	</#list>
+  </select>
+  
+	<sql id="Base_Column_List" >
+	    <#list p.gci_columns?sort_by("ordinal_position") as u><#if u.column_key=="PRI">${u.clumn_name}<#else>,${u.clumn_name}</#if></#list>
+	</sql> 
+  
+  <!-- 获取表所有数据 -->    
+  <select id="findAll" resultMap="BaseResultMap" parameterType="java.lang.${p.pk_type}" >
+    select 
+    <include refid="Base_Column_List" />
+    from ${p.table_name}
+  </select>
+  
+  <!-- 根据主键获取对象 -->    
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.${p.pk_type}" >
+    select 
+    <include refid="Base_Column_List" />
+    from ${p.table_name}
+    where ${p.pk_name} =  #${"{id"},jdbcType=${p.pk_obj_type?upper_case}}
+  </select>
+  
+  <!-- 根据主键删除对象 -->    
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.${p.pk_type}" >
+    delete from ${p.table_name}
+    where ${p.pk_name} = #${"{id"},jdbcType=${p.pk_obj_type?upper_case}}
+  </delete>
+  
+   <!-- 清空表数据 -->    
+  <delete id="deleteAll" parameterType="java.lang.${p.pk_type}" >
+    delete from ${p.table_name}
+  </delete>
+  
+  <!-- 保存对象 -->    
+   <insert id="insert" parameterType="${p.basePackage}.entity.${p.bizPackage}.${p.className}">
+    insert into ${p.table_name} (<#list p.gci_columns?sort_by("ordinal_position") as u><#if u.column_key=="PRI">${p.pk_name}<#else>,${u.clumn_name}</#if></#list>)
+    values ( <#list p.gci_columns?sort_by("ordinal_position") as u><#if u.column_key=="PRI">#${"{${p.pk_name}"},jdbcType=${p.pk_obj_type?upper_case}}<#else>,#${"{"+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"}</#if></#list>)
+  </insert>
+  
+  <!-- 保存对象并返回主键id的值  keyProperty="id" 返回的值-->    
+   <insert id="insertReturnIdVlues" useGeneratedKeys="true" keyProperty="${p.pk_name}" parameterType="${p.basePackage}.entity.${p.bizPackage}.${p.className}">
+    insert into ${p.table_name} (<#list p.gci_columns?sort_by("ordinal_position") as u><#if u.column_key=="PRI">${p.pk_name}<#else>,${u.clumn_name}</#if></#list>)
+    values ( <#list p.gci_columns?sort_by("ordinal_position") as u><#if u.column_key=="PRI">#${"{${p.pk_name}"},jdbcType=${p.pk_obj_type?upper_case}}<#else>,#${"{"+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"}</#if></#list>)
+  </insert>
+  
+  <!-- 根据对象字段值保存 -->    
+   <insert id="insertSelective" parameterType="${p.basePackage}.entity.${p.bizPackage}.${p.className}" >
+    insert into ${p.table_name}
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <#list p.gci_columns?sort_by("ordinal_position") as u>
+       <if test="${u.clumn_name} != null" >
+        ${u.clumn_name},
+      </if>
+      </#list>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <#list p.gci_columns?sort_by("ordinal_position") as u>
+       <if test="${u.clumn_name} != null" >
+        #${"{"+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"},
+      </if>
+      </#list>
+    </trim>
+  </insert>
+   
+   <!-- 根据对象字段值更新 -->    
+   <update id="updateByPrimaryKeySelective" parameterType="${p.basePackage}.entity.${p.bizPackage}.${p.className}" >
+    update ${p.table_name}
+    <set>
+      <#list p.gci_columns?sort_by("ordinal_position") as u>
+      	<#if u.clumn_name=="id"><#else>
+      	<if test="${u.clumn_name} != null" >
+        	${u.clumn_name} = #${"{"+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"},
+      	</if>
+      	</#if>
+      </#list>
+    </set>
+    where ${p.pk_name} = #${"{id"},jdbcType=${p.pk_obj_type?upper_case}}
+  </update>
+  
+  <!-- 根据对象主键更新 -->    
+  <update id="updateByPrimaryKey" parameterType="${p.basePackage}.entity.${p.bizPackage}.${p.className}" >
+    update ${p.table_name}
+    set 
+  <#list p.gci_columns?sort_by("ordinal_position") as u>
+    	<#if u.clumn_name=="id"><#else>
+    	<if test="${u.clumn_name} != null" >
+    	<#if !u_has_next>${u.clumn_name} = #${"{"+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"}<#else>${u.clumn_name} = #${"{"+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"},</#if>    	
+    	</if>
+    	</#if>
+    </#list>
+    where ${p.pk_name} = #${"{id"},jdbcType=${p.pk_obj_type?upper_case}}
+  </update>
+  	 	
+</mapper>   
