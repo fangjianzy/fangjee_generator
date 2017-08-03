@@ -47,7 +47,20 @@
 		<groupId>org.freemarker</groupId>
 		<artifactId>freemarker</artifactId>
 		<version>2.3.23</version>
-	</dependency> 
+	</dependency>
+	<!--  PageHelper 插件分页  2017-8-1-->
+	<dependency>  
+	    <groupId>com.github.pagehelper</groupId>  
+	    <artifactId>pagehelper</artifactId>  
+	    <version>4.1.6</version> 
+	</dependency>
+	<!--  PageHelper 插件分页 SQL 解析工具 -->
+	<dependency>
+	    <groupId>com.github.jsqlparser</groupId>
+	    <artifactId>jsqlparser</artifactId>
+	    <version>0.9</version>
+	</dependency>
+	<!--  PageHelper 插件分页  end--> 
   </dependencies>
   <distributionManagement>
         <repository>

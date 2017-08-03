@@ -422,6 +422,10 @@ public class CodeFactory {
 			temp.setLowerName(Tools.toLowerCaseFirstOne(entityName));
 			//模块/表/实体_crud.jsp
 			temp.setTable_name(cfg.getTable_name());
+			//表的所有字段
+			for(GciTable col:columns){
+				System.out.println("校验类型="+col.getDataType()+","+col.getClumn_name()+","+col.getData_type());
+			}
 			temp.setGci_columns(columns);
 			temp.setPk_type(pk_type);
 			//主键名称
