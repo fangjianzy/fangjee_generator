@@ -36,6 +36,18 @@
   	     <if test="vo.${u.clumn_name} != null and vo.${u.clumn_name} != ''" >
        	 	and ${u.clumn_name} like CONCAT('%',#${"{vo."+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"},'%')
      	 </if>
+     	<#elseif u.column_javatype=="Long">
+     	<if test="vo.${u.clumn_name} != null and vo.${u.clumn_name} != ''" >
+       	 	and ${u.clumn_name} = #${"{vo."+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
+     	 </if>
+     	<#elseif u.column_javatype=="int">
+     	<if test="vo.${u.clumn_name} != null and vo.${u.clumn_name} != ''" >
+       	 	and ${u.clumn_name} = #${"{vo."+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
+     	 </if>
+     	 <#elseif u.column_javatype=="long">
+     	<if test="vo.${u.clumn_name} != null and vo.${u.clumn_name} != ''" >
+       	 	and ${u.clumn_name} = #${"{vo."+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
+     	 </if>
   	    <#else>
       	 <if test="vo.${u.clumn_name} != null" >
        	 	and ${u.clumn_name} = #${"{vo."+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
@@ -61,6 +73,18 @@
   	    <#if u.column_javatype=="String">
   	     <if test="vo.${u.clumn_name} != null and vo.${u.clumn_name} != ''" >
        	 	and ${u.clumn_name} like CONCAT('%',#${"{vo."+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"},'%')
+     	 </if>
+     	 <#elseif u.column_javatype=="Long">
+     	<if test="vo.${u.clumn_name} != null and vo.${u.clumn_name} != ''" >
+       	 	and ${u.clumn_name} = #${"{vo."+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
+     	 </if>
+     	<#elseif u.column_javatype=="int">
+     	<if test="vo.${u.clumn_name} != null and vo.${u.clumn_name} != ''" >
+       	 	and ${u.clumn_name} = #${"{vo."+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
+     	 </if>
+     	 <#elseif u.column_javatype=="long">
+     	<if test="vo.${u.clumn_name} != null and vo.${u.clumn_name} != ''" >
+       	 	and ${u.clumn_name} = #${"{vo."+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
      	 </if>
   	    <#else>
       	 <if test="vo.${u.clumn_name} != null" >

@@ -220,8 +220,9 @@
 			</tr>
 			</table>
 			<!----------end:上下翻页------------------>
-		<div class="clear"></div>
 	</div>
+	<div class="clear"></div>
+	<div style="height: 30px"></div>
 </form>
 </body>
 </html>

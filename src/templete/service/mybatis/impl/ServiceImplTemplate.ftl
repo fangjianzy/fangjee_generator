@@ -41,6 +41,8 @@ public class ${p.className}ServiceImpl implements ${p.className}Service {
 		this.${p.lowerName}dao.insert(model);
 		<#elseif (p.pk_type=='Integer')>
 		this.${p.lowerName}dao.insert(model);
+		<#elseif (p.pk_type=='Long')>
+		this.${p.lowerName}dao.insert(model);
 		<#else>
 		//主键为string类型，基于uuid工具类生成主键
 		String id = UuidUtil.get32UUID();
@@ -53,6 +55,8 @@ public class ${p.className}ServiceImpl implements ${p.className}Service {
 		<#if (p.pk_type=='int')> 
 		this.${p.lowerName}dao.insertSelective(model);
 		<#elseif (p.pk_type=='Integer')>
+		this.${p.lowerName}dao.insertSelective(model);
+		<#elseif (p.pk_type=='Long')>
 		this.${p.lowerName}dao.insertSelective(model);
 		<#else>
 		//主键为string类型，基于uuid工具类生成主键
@@ -76,6 +80,13 @@ public class ${p.className}ServiceImpl implements ${p.className}Service {
 		<#elseif (p.pk_type=='Integer')>
 		//主键为int类型，按照mybais方式返回主键
 		int id =0;
+		log.info("数据保存之前ID"+ model.getId());
+		this.${p.lowerName}dao.insertReturnIdVlues(model);
+		id= model.getId();
+		return id;
+		<#elseif (p.pk_type=='Long')>
+		//主键为int类型，按照mybais方式返回主键
+		long id =0;
 		log.info("数据保存之前ID"+ model.getId());
 		this.${p.lowerName}dao.insertReturnIdVlues(model);
 		id= model.getId();

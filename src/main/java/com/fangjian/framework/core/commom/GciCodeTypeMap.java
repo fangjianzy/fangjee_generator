@@ -72,7 +72,7 @@ public class GciCodeTypeMap {
 		    tp.put("float", "Double");
 		    tp.put("blob", "Chinese");
 		    tp.put("bigint", "Integer");
-		    tp.put("tinyint", "boolean");
+		    tp.put("tinyint", "Integer");
 		    tp.put("decimal", "Double");//货币格式
 		    tp.put("enum", "Require");
 		    tp.put("text", "Require");
