@@ -74,7 +74,7 @@ public class CodeFactory {
 					pk_obj_type = "Integer";
 				}else if("bigint".equals(pkobj.getData_type())){
 					pk_type = "Long";
-					pk_obj_type = "Long";
+					pk_obj_type = "bigint";
 				}else if("varchar".equals(pkobj.getData_type())){
 					pk_type = "String";
 					pk_obj_type = "VARCHAR";
