@@ -1,6 +1,7 @@
 package ${p.basePackage}.query.${p.bizPackage};
 import java.util.Date;
 import java.math.BigDecimal;
+import org.springframework.format.annotation.DateTimeFormat;
 /**
  * 描述:${p.code_name}</br>
  * 功能：</b>${p.code_name}实体表查询专属实体vo</br>
@@ -8,6 +9,8 @@ import java.math.BigDecimal;
  * 时间:${.now}</br>
  */
 public class ${p.className}Query implements java.io.Serializable{
+ 	
+ 	private static final long serialVersionUID = 1L;
  <#list p.gci_columns as u>
  	public static final String ALIAS_${u.clumn_name} = "${u.column_comment}";
  </#list>

@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * 时间:${.now}</br>
  */
 public class ${p.className} implements java.io.Serializable{
+	private static final long serialVersionUID = 1L;
 <#list p.gci_columns as u>
  	/**
  	* ${u.column_comment}
