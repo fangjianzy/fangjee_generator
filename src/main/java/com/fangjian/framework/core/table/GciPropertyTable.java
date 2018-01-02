@@ -34,8 +34,8 @@ public class GciPropertyTable {
     	conn = GciJdbcConnect.getConnection();
     	String SQL="SELECT t.TABLE_SCHEMA,t.TABLE_NAME,t.COLUMN_NAME,t.ORDINAL_POSITION,t.DATA_TYPE,t.CHARACTER_MAXIMUM_LENGTH,t.COLUMN_KEY,t.COLUMN_COMMENT,UCASE(LEFT(t.COLUMN_NAME,1)) AS upCo,SUBSTRING(t.COLUMN_NAME,2) AS lwCo FROM information_schema.COLUMNS t WHERE t.TABLE_NAME= ? AND  table_schema = ? ORDER BY t.ORDINAL_POSITION ASC ";
     	ps = conn.prepareStatement(SQL);
-    	ps.setString(1, tabelname.toUpperCase());
-    	ps.setString(2, sechma.toUpperCase());
+    	ps.setString(1, tabelname);
+    	ps.setString(2, sechma);
     	ret = ps.executeQuery();
     	GciTable table = null;
     	while(ret.next()){
@@ -101,8 +101,8 @@ public class GciPropertyTable {
     	String SQL="SELECT t.TABLE_SCHEMA,t.TABLE_NAME,t.COLUMN_NAME,t.ORDINAL_POSITION,t.DATA_TYPE,t.CHARACTER_MAXIMUM_LENGTH,t.COLUMN_KEY,t.COLUMN_COMMENT,UCASE(LEFT(t.COLUMN_NAME,1)) AS upCo,SUBSTRING(t.COLUMN_NAME,2) AS lwCo  FROM information_schema.COLUMNS t WHERE t.COLUMN_KEY='pri' AND t.TABLE_NAME= ? AND  table_schema = ? ORDER BY t.ORDINAL_POSITION ASC ";
     	System.out.println(SQL);
     	ps = conn.prepareStatement(SQL);
-    	ps.setString(1, tabelname.toUpperCase());
-    	ps.setString(2, sechma.toUpperCase());
+    	ps.setString(1, tabelname);
+    	ps.setString(2, sechma);
     	ret = ps.executeQuery();
     	GciTable table = null;
     	while(ret.next()){

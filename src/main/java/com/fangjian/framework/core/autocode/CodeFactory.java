@@ -60,7 +60,6 @@ public class CodeFactory {
 				entityName=Tools.toUpperCaseFirstOne(cfg.getEntity_name());
 			}
 			Frameworkcfg cg = new Frameworkcfg();
-			
 			//根据配置获取table信息
 			List<GciTable> list = GciPropertyTable.getTableInfoByName(schema, cfg.getTable_name());
 			List<GciTable> PKlist = GciPropertyTable.getTablesPKColumnByName(schema, cfg.getTable_name());
@@ -69,11 +68,19 @@ public class CodeFactory {
 			String pk_type = "Integer";
 			String pk_obj_type = "VARCHAR";
 			if(pkobj!=null){
-				pk_type = "int".equals(pkobj.getData_type())?"Integer":"String";
-				if(pk_type.equals("String")){
+				System.out.println("主键类型="+pkobj.getData_type());
+				if("int".equals(pkobj.getData_type())){
+					pk_type = "Integer";
+					pk_obj_type = "Integer";
+				}else if("bigint".equals(pkobj.getData_type())){
+					pk_type = "Long";
+					pk_obj_type = "bigint";
+				}else if("varchar".equals(pkobj.getData_type())){
+					pk_type = "String";
 					pk_obj_type = "VARCHAR";
 				}else{
-					pk_obj_type = "Integer";
+					pk_type = "String";
+					pk_obj_type = "VARCHAR";
 				}
 			}
 			GciTable  table = null;
@@ -422,6 +429,10 @@ public class CodeFactory {
 			temp.setLowerName(Tools.toLowerCaseFirstOne(entityName));
 			//模块/表/实体_crud.jsp
 			temp.setTable_name(cfg.getTable_name());
+			//表的所有字段
+			for(GciTable col:columns){
+				System.out.println("校验类型="+col.getDataType()+","+col.getClumn_name()+","+col.getData_type());
+			}
 			temp.setGci_columns(columns);
 			temp.setPk_type(pk_type);
 			//主键名称
@@ -590,7 +601,7 @@ public class CodeFactory {
 			temp.setLowerName("iemsuser");
 			m.put("p", temp);
 			cg.setDatas(m);
-			CodeFactory.genAutoCodeByTempleteName(cg, "ControllerTemplate.ftl");
+			//CodeFactory.genAutoCodeByTempleteName(cg, "ControllerTemplate.ftl");
 			
 			//cg.setTemplete_path("web\\springmvc");
 			//GciCode.genAutoCode(cg);

@@ -6,7 +6,7 @@
   <artifactId>fangjee_generator</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>jar</packaging>
-
+ <!--代码生成器名称-->
   <name>fangjee_generator</name>
   <url>http://maven.apache.org</url>
 
@@ -47,18 +47,31 @@
 		<groupId>org.freemarker</groupId>
 		<artifactId>freemarker</artifactId>
 		<version>2.3.23</version>
-	</dependency> 
+	</dependency>
+	<!--  PageHelper 插件分页  2017-8-1-->
+	<dependency>  
+	    <groupId>com.github.pagehelper</groupId>  
+	    <artifactId>pagehelper</artifactId>  
+	    <version>4.1.6</version> 
+	</dependency>
+	<!--  PageHelper 插件分页 SQL 解析工具 -->
+	<dependency>
+	    <groupId>com.github.jsqlparser</groupId>
+	    <artifactId>jsqlparser</artifactId>
+	    <version>0.9</version>
+	</dependency>
+	<!--  PageHelper 插件分页  end--> 
   </dependencies>
   <distributionManagement>
         <repository>
             <id>releases</id>
             <name>Nexus Release Repository</name>
-            <url>http://192.168.8.8:8081/nexus/content/repositories/releases/</url>
+            <url>http://14.18.234.33:8081/nexus/content/repositories/releases/</url>
         </repository>
         <snapshotRepository>
             <id>Snapshots</id>
             <name>Nexus Snapshot Repository</name>
-            <url>http://192.168.8.8:8081/nexus/content/repositories/snapshots/</url>
+            <url>http://14.18.234.33:8081/nexus/content/repositories/snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
 </project>
