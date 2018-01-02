@@ -60,9 +60,9 @@
 		<#list p.gci_columns as u>
 		<#if u.column_key=='PRI'><#else>
 		<tr>
-			<td><%=${p.className}Query.ALIAS_${u.clumn_name} %>：</td>
+			<td><%=${p.className}Query.ALIAS_${u.javaColumnFileNameCode} %>：</td>
 			<td>
-			<#if u.dataType=="Date"><fmt:formatDate value="${"${"}vo.${u.clumn_name}}" type="date"/><#else>${"${"}vo.${u.clumn_name}}</#if>
+			<#if u.dataType=="Date"><fmt:formatDate value="${"${"}vo.${u.javaColumnFileNameCode}}" type="date"/><#else>${"${"}vo.${u.javaColumnFileNameCode}}</#if>
 			</td>
 		</tr>
 		</#if>	

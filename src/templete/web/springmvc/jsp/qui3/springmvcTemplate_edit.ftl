@@ -53,9 +53,9 @@
 		<#list p.gci_columns as u>
 		<#if u.column_key=='PRI'><#else>
 		<tr>
-			<td><%=${p.className}Query.ALIAS_${u.clumn_name} %>：</td>
+			<td><%=${p.className}Query.ALIAS_${u.javaColumnFileNameCode} %>：</td>
 			<td>
-			<input type="text" <#if u.dataType=="Date">class="${u.requireClass}" value="<fmt:formatDate value="${"${"}vo.${u.clumn_name}}" />" <#else>class="${u.requireClass}" style="width:255px" value="${"${"}vo.${u.clumn_name}}"</#if>  name="${u.clumn_name}"  id="${u.clumn_name}_id" /><#if u.require=='true'><span class="star">*</span><#else></#if>
+			<input type="text" <#if u.dataType=="Date">class="${u.requireClass}" value="<fmt:formatDate value="${"${"}vo.${u.javaColumnFileNameCode}}" />" <#else>class="${u.requireClass}" style="width:255px" value="${"${"}vo.${u.javaColumnFileNameCode}}"</#if>  name="${u.javaColumnFileNameCode}"  id="${u.javaColumnFileNameCode}_id" /><#if u.require=='true'><span class="star">*</span><#else></#if>
 			</td>
 		</tr>
 		</#if>	

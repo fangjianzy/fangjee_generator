@@ -9,6 +9,8 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.fangjian.framework.common.util.UnderlineToCodeTools;
 import com.fangjian.framework.core.commom.GciCodeTypeMap;
 import com.fangjian.framework.core.jdbc.GciJdbcConnect;
 /**
@@ -51,6 +53,11 @@ public class GciPropertyTable {
     		table.setColumn_getset(ret.getString("upCo")+ret.getString("lwCo").toLowerCase());
     		table.setColumn_javatype(GciCodeTypeMap.getJavaTypeBySqlType().get(ret.getString("DATA_TYPE")));
     		table.setColumn_javaMybatintype(GciCodeTypeMap.getMySqlTypeBySqlType().get(ret.getString("DATA_TYPE")));
+    		//生成驼峰代码
+    		table.setJavaColumnFileNameCode(UnderlineToCodeTools.underlineToCamel2(ret.getString("COLUMN_NAME").toLowerCase()));
+    		table.setJavaColumnGetSetFileNameCode(UnderlineToCodeTools.upperCase(UnderlineToCodeTools.underlineToCamel2(ret.getString("COLUMN_NAME"))));
+    		
+    		
     		//自动生成验证信息相关字段熟悉
     		table.setDataType(GciCodeTypeMap.getValidateDateType().get(ret.getString("DATA_TYPE")));
     		if("varchar".equals(ret.getString("DATA_TYPE"))){

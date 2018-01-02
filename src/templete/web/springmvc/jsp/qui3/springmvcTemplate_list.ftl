@@ -123,24 +123,21 @@
 	<div class="box2" panelTitle="查询" id="searchPanel" statusText="显示" startState="close" afterStatusText="隐藏">
 		<table>
 			<tr>
-				<#list p.gci_columns as u>
-				 	<#if (u.column_key=='PRI')> 
-						
-					<#else> 
-					<#if (u.dataType=="Date")>
-						<td><%=${p.className}Query.ALIAS_${u.clumn_name} %></td>
-						<td><input type="text" name="${u.clumn_name}" value="" class="date[custom[date]]"/></td>
-					<#else>
-				    	<td><%=${p.className}Query.ALIAS_${u.clumn_name} %></td>
-						<td><input type="text" name="${u.clumn_name}" value=""/></td>
-				    	</#if>
-					</#if> 
-				</#list>
+		<#list p.gci_columns as u>
 			
-				<td>查询参数:</td>
-				<td>
-					<input type="text" name="name" value=""/>
-				</td>
+		<#if (u.column_key=='PRI')> 
+	
+		<#else> 
+			<#if (u.dataType=="Date")>
+				<td><%=${p.className}Query.ALIAS_${u.javaColumnFileNameCode} %></td>
+				<td><input type="text" name="${u.javaColumnFileNameCode}" value="" class="date[custom[date]]"/></td>
+			<#else>
+	    	<td><%=${p.className}Query.ALIAS_${u.javaColumnFileNameCode} %></td>
+			<td><input type="text" name="${u.javaColumnFileNameCode}" value=""/></td>
+	    	</#if>
+		</#if> 
+			
+		</#list>
 				<td><button onclick="query();"><span class="icon_find">查询</span></button></td>
 			</tr>
 		</table>
@@ -162,7 +159,7 @@
 			<tr>
 			    <#list p.gci_columns as u>
 			    	<th width="10%">
-			    		<%=${p.className}Query.ALIAS_${u.clumn_name} %>
+			    		<%=${p.className}Query.ALIAS_${u.javaColumnFileNameCode} %>
 			    	</th>
 				</#list>
 			</tr>
@@ -170,12 +167,12 @@
 			<tr>
 			 <#list p.gci_columns as u>
 			 	<#if (u.column_key=='PRI')> 
-					<td><input type="radio" name="${u.clumn_name}" value="${"${"}vo.${u.clumn_name}}"/></td>
+					<td><input type="radio" name="${u.javaColumnFileNameCode}" value="${"${"}vo.${u.javaColumnFileNameCode}}"/></td>
 				<#else> 
 					<#if (u.dataType=="Date")>
-					<td><fmt:formatDate value="${"${"}vo.${u.clumn_name}}" type="both"/></td>
+					<td><fmt:formatDate value="${"${"}vo.${u.javaColumnFileNameCode}}" type="both"/></td>
 					<#else>
-			    	<td>${"${"}vo.${u.clumn_name}}</td>
+			    	<td>${"${"}vo.${u.javaColumnFileNameCode}}</td>
 			    	</#if>
 				</#if> 
 			</#list>

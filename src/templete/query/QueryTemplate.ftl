@@ -12,7 +12,7 @@ public class ${p.className}Query implements java.io.Serializable{
  	
  	private static final long serialVersionUID = 1L;
  <#list p.gci_columns as u>
- 	public static final String ALIAS_${u.clumn_name} = "${u.column_comment}";
+ 	public static final String ALIAS_${u.javaColumnFileNameCode} = "${u.column_comment}";
  </#list>
 <#list p.gci_columns as u>
  	/**
@@ -21,15 +21,15 @@ public class ${p.className}Query implements java.io.Serializable{
  	<#if u.column_javatype == 'java.util.Date'>
  	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
  	</#if>
-   	private ${u.column_javatype} ${u.clumn_name};
+   	private ${u.column_javatype} ${u.javaColumnFileNameCode};
  </#list>
  
  <#list p.gci_columns as u>
-   	public void set${u.column_getset}(${u.column_javatype} ${u.clumn_name}){
-   		this.${u.clumn_name} = ${u.clumn_name};
+   	public void set${u.javaColumnGetSetFileNameCode}(${u.column_javatype} ${u.javaColumnFileNameCode}){
+   		this.${u.javaColumnFileNameCode} = ${u.javaColumnFileNameCode};
    	}
-   	public ${u.column_javatype} get${u.column_getset}() {
-		return ${u.clumn_name};
+   	public ${u.column_javatype} get${u.javaColumnGetSetFileNameCode}() {
+		return ${u.javaColumnFileNameCode};
 	}
  </#list>	
 	

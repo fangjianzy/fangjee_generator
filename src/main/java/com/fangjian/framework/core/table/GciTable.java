@@ -50,8 +50,27 @@ public class GciTable {
 	 */
 	private String requireClass;
 	
+	/**
+	 * 生成驼峰编码
+	 */
+	private String javaColumnFileNameCode;
+	/**
+	 * 生成驼峰编码的getset
+	 */
+	private String javaColumnGetSetFileNameCode;
 	
-	
+	public String getJavaColumnFileNameCode() {
+		return javaColumnFileNameCode;
+	}
+	public void setJavaColumnFileNameCode(String javaColumnFileNameCode) {
+		this.javaColumnFileNameCode = javaColumnFileNameCode;
+	}
+	public String getJavaColumnGetSetFileNameCode() {
+		return javaColumnGetSetFileNameCode;
+	}
+	public void setJavaColumnGetSetFileNameCode(String javaColumnGetSetFileNameCode) {
+		this.javaColumnGetSetFileNameCode = javaColumnGetSetFileNameCode;
+	}
 	public String getRequireClass() {
 		return requireClass;
 	}

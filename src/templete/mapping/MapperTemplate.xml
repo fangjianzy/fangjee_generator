@@ -5,9 +5,9 @@
    <resultMap id="BaseResultMap" type="${p.basePackage}.entity.${p.bizPackage}.${p.className}">
 	<#list p.gci_columns?sort_by("ordinal_position") as u>
 		<#if u.column_key=="PRI">
-		  <id column="${u.clumn_name}" property="${u.clumn_name}" jdbcType="${u.column_javaMybatintype?upper_case}" />
+		  <id column="${u.clumn_name}" property="${u.javaColumnFileNameCode}" jdbcType="${u.column_javaMybatintype?upper_case}" />
 		<#else>
-		  <result column="${u.clumn_name}" property="${u.clumn_name}" jdbcType="${u.column_javaMybatintype?upper_case}"/>
+		  <result column="${u.clumn_name}" property="${u.javaColumnFileNameCode}" jdbcType="${u.column_javaMybatintype?upper_case}"/>
 		</#if>
 	</#list>
 	</resultMap>
@@ -33,24 +33,24 @@
   	    <!-- 带条件情况，在此处添加逻辑 -->
   	    <#list p.gci_columns?sort_by("ordinal_position") as u>
   	    <#if u.column_javatype=="String">
-  	     <if test="vo.${u.clumn_name} != null and vo.${u.clumn_name} != ''" >
-       	 	and ${u.clumn_name} like CONCAT('%',#${"{vo."+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"},'%')
+  	     <if test="vo.${u.javaColumnFileNameCode} != null and vo.${u.javaColumnFileNameCode} != ''" >
+       	 	and ${u.clumn_name} like CONCAT('%',#${"{vo."+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"},'%')
      	 </if>
      	<#elseif u.column_javatype=="Long">
      	<if test="vo.${u.clumn_name} != null and vo.${u.clumn_name} != ''" >
-       	 	and ${u.clumn_name} = #${"{vo."+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
+       	 	and ${u.clumn_name} = #${"{vo."+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
      	 </if>
      	<#elseif u.column_javatype=="int">
      	<if test="vo.${u.clumn_name} != null and vo.${u.clumn_name} != ''" >
-       	 	and ${u.clumn_name} = #${"{vo."+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
+       	 	and ${u.clumn_name} = #${"{vo."+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
      	 </if>
      	 <#elseif u.column_javatype=="long">
      	<if test="vo.${u.clumn_name} != null and vo.${u.clumn_name} != ''" >
-       	 	and ${u.clumn_name} = #${"{vo."+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
+       	 	and ${u.clumn_name} = #${"{vo."+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
      	 </if>
   	    <#else>
       	 <if test="vo.${u.clumn_name} != null" >
-       	 	and ${u.clumn_name} = #${"{vo."+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
+       	 	and ${u.clumn_name} = #${"{vo."+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
      	 </if>
      	 </#if>
       	</#list>
@@ -71,24 +71,24 @@
 	    <!-- 带条件情况，在此处添加逻辑 -->
   	    <#list p.gci_columns?sort_by("ordinal_position") as u>
   	    <#if u.column_javatype=="String">
-  	     <if test="vo.${u.clumn_name} != null and vo.${u.clumn_name} != ''" >
-       	 	and ${u.clumn_name} like CONCAT('%',#${"{vo."+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"},'%')
+  	     <if test="vo.${u.javaColumnFileNameCode} != null and vo.${u.javaColumnFileNameCode} != ''" >
+       	 	and ${u.clumn_name} like CONCAT('%',#${"{vo."+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"},'%')
      	 </if>
      	 <#elseif u.column_javatype=="Long">
-     	<if test="vo.${u.clumn_name} != null and vo.${u.clumn_name} != ''" >
-       	 	and ${u.clumn_name} = #${"{vo."+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
+     	<if test="vo.${u.javaColumnFileNameCode} != null and vo.${u.javaColumnFileNameCode} != ''" >
+       	 	and ${u.clumn_name} = #${"{vo."+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
      	 </if>
      	<#elseif u.column_javatype=="int">
-     	<if test="vo.${u.clumn_name} != null and vo.${u.clumn_name} != ''" >
-       	 	and ${u.clumn_name} = #${"{vo."+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
+     	<if test="vo.${u.javaColumnFileNameCode} != null and vo.${u.javaColumnFileNameCode} != ''" >
+       	 	and ${u.clumn_name} = #${"{vo."+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
      	 </if>
      	 <#elseif u.column_javatype=="long">
-     	<if test="vo.${u.clumn_name} != null and vo.${u.clumn_name} != ''" >
-       	 	and ${u.clumn_name} = #${"{vo."+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
+     	<if test="vo.${u.javaColumnFileNameCode} != null and vo.${u.javaColumnFileNameCode} != ''" >
+       	 	and ${u.clumn_name} = #${"{vo."+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
      	 </if>
   	    <#else>
-      	 <if test="vo.${u.clumn_name} != null" >
-       	 	and ${u.clumn_name} = #${"{vo."+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
+      	 <if test="vo.${u.javaColumnFileNameCode} != null" >
+       	 	and ${u.clumn_name} = #${"{vo."+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
      	 </if>
      	 </#if>
       	</#list>
@@ -127,13 +127,13 @@
   <!-- 保存对象 -->    
    <insert id="insert" parameterType="${p.basePackage}.entity.${p.bizPackage}.${p.className}">
     insert into ${p.table_name} (<#list p.gci_columns?sort_by("ordinal_position") as u><#if u.column_key=="PRI">${p.pk_name}<#else>,${u.clumn_name}</#if></#list>)
-    values ( <#list p.gci_columns?sort_by("ordinal_position") as u><#if u.column_key=="PRI">#${"{${p.pk_name}"},jdbcType=${p.pk_obj_type?upper_case}}<#else>,#${"{"+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"}</#if></#list>)
+    values ( <#list p.gci_columns?sort_by("ordinal_position") as u><#if u.column_key=="PRI">#${"{${p.pk_name}"},jdbcType=${p.pk_obj_type?upper_case}}<#else>,#${"{"+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"}</#if></#list>)
   </insert>
   
   <!-- 保存对象并返回主键id的值  keyProperty="id" 返回的值-->    
    <insert id="insertReturnIdVlues" useGeneratedKeys="true" keyProperty="${p.pk_name}" parameterType="${p.basePackage}.entity.${p.bizPackage}.${p.className}">
     insert into ${p.table_name} (<#list p.gci_columns?sort_by("ordinal_position") as u><#if u.column_key=="PRI">${p.pk_name}<#else>,${u.clumn_name}</#if></#list>)
-    values ( <#list p.gci_columns?sort_by("ordinal_position") as u><#if u.column_key=="PRI">#${"{${p.pk_name}"},jdbcType=${p.pk_obj_type?upper_case}}<#else>,#${"{"+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"}</#if></#list>)
+    values ( <#list p.gci_columns?sort_by("ordinal_position") as u><#if u.column_key=="PRI">#${"{${p.pk_name}"},jdbcType=${p.pk_obj_type?upper_case}}<#else>,#${"{"+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"}</#if></#list>)
   </insert>
   
   <!-- 根据对象字段值保存 -->    
@@ -141,14 +141,14 @@
     insert into ${p.table_name}
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <#list p.gci_columns?sort_by("ordinal_position") as u>
-       <if test="${u.clumn_name} != null" >
+       <if test="${u.javaColumnFileNameCode} != null" >
         ${u.clumn_name},
       </if>
       </#list>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <#list p.gci_columns?sort_by("ordinal_position") as u>
-       <if test="${u.clumn_name} != null" >
+       <if test="${u.javaColumnFileNameCode} != null" >
         #${"{"+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"},
       </if>
       </#list>
@@ -161,8 +161,8 @@
     <set>
       <#list p.gci_columns?sort_by("ordinal_position") as u>
       	<#if u.clumn_name=="id"><#else>
-      	<if test="${u.clumn_name} != null" >
-        	${u.clumn_name} = #${"{"+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"},
+      	<if test="${u.javaColumnFileNameCode} != null" >
+        	${u.clumn_name} = #${"{"+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"},
       	</if>
       	</#if>
       </#list>
@@ -176,8 +176,8 @@
     set 
   <#list p.gci_columns?sort_by("ordinal_position") as u>
     	<#if u.clumn_name=="id"><#else>
-    	<if test="${u.clumn_name} != null" >
-    	<#if !u_has_next>${u.clumn_name} = #${"{"+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"}<#else>${u.clumn_name} = #${"{"+u.clumn_name},jdbcType=${u.column_javaMybatintype?upper_case+"}"},</#if>    	
+    	<if test="${u.javaColumnFileNameCode} != null" >
+    	<#if !u_has_next>${u.clumn_name} = #${"{"+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"}<#else>${u.clumn_name} = #${"{"+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"},</#if>    	
     	</if>
     	</#if>
     </#list>
