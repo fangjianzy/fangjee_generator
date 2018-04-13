@@ -55,6 +55,7 @@ public class GciPropertyTable {
     		table.setColumn_javaMybatintype(GciCodeTypeMap.getMySqlTypeBySqlType().get(ret.getString("DATA_TYPE")));
     		//生成驼峰代码
     		table.setJavaColumnFileNameCode(UnderlineToCodeTools.underlineToCamel2(ret.getString("COLUMN_NAME").toLowerCase()));
+    		System.out.println(table.getJavaColumnFileNameCode());
     		table.setJavaColumnGetSetFileNameCode(UnderlineToCodeTools.upperCase(UnderlineToCodeTools.underlineToCamel2(ret.getString("COLUMN_NAME"))));
     		
     		

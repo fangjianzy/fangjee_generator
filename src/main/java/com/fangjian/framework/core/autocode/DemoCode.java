@@ -31,15 +31,15 @@ public class DemoCode {
 		 * 					--mapping.iemsuser
 		 * 					--jsp/iemsuser/tablename/iemsuser_CRUD.JSP
 		 */
-		cfg.setBasePackage("com.fangjian.framework");
+		cfg.setBasePackage("com.anfachina.tms");
 		
 		//模块包,同一模块这个地方不需要修改,，比如系统管理模块，设备管理模块
-		cfg.setBizPackage("youngy");
+		cfg.setBizPackage("menu");
 		//mvc:com.jiesai.framework.controller.iemsuser;
 		//要生成的表名称
-		cfg.setTable_name("advance_order");
+		cfg.setTable_name("tms_common_menu");
 		//表中文名称
-		cfg.setCode_name("测试信息");
+		cfg.setCode_name("菜单");
 		//在硬盘路径下输出
 		cfg.setOutput_path("D:\\generator-output\\gci_test");
 		

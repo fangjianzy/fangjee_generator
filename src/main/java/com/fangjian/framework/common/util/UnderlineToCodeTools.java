@@ -95,7 +95,7 @@ public class UnderlineToCodeTools {
 	}
 
 	public static void main(String[] args) {
-		String aaa = "app_version_fld";
+		String aaa = "tms_common_menu";
 		System.out.println(underlineToCamel(aaa));
 		System.out.println(underlineToCamel2(aaa));
 		aaa = "appVersionFld";

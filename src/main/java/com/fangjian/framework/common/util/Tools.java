@@ -2,18 +2,13 @@ package com.fangjian.framework.common.util;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 /**
@@ -278,8 +273,9 @@ public class Tools {
 	  * throws
 	   */
 	  public static String repTableNameToJavaName(String tableName){
-		  String s  = tableName.replace("_", "");
-		  s = s.toLowerCase();
+		  //String s  = tableName.replace("_", "");
+		  //s = s.toLowerCase();
+		  String s = UnderlineToCodeTools.underlineToCamel2(tableName);
 		  return s;
 	  }
 	  
