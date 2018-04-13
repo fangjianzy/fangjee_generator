@@ -37,9 +37,9 @@ public class DemoCode {
 		cfg.setBizPackage("menu");
 		//mvc:com.jiesai.framework.controller.iemsuser;
 		//要生成的表名称
-		cfg.setTable_name("tms_common_menu");
+		cfg.setTable_name("tms_truck");
 		//表中文名称
-		cfg.setCode_name("菜单");
+		cfg.setCode_name("车辆管理");
 		//在硬盘路径下输出
 		cfg.setOutput_path("D:\\generator-output\\gci_test");
 		
