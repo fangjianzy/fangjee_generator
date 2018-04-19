@@ -23,6 +23,13 @@ public interface BaseMybatisDao<T,PK extends Serializable> {
 	public void deleteByPrimaryKey(PK id);
 	
 	/**
+	 * 删除返回删除数据条数
+	 * @param id
+	 * @return
+	 */
+	public Integer deleteEntryByPrimaryKey(PK id);
+	
+	/**
 	 * 保存对象
 	 * @param model
 	 */
@@ -45,6 +52,12 @@ public interface BaseMybatisDao<T,PK extends Serializable> {
 	 */
 	public void updateByPrimaryKeySelective(T model);
 	
+	/**
+	 * 更新对象返回被操作记录条数
+	 * @param model
+	 * @return
+	 */
+	public Integer updateEntryByPrimaryKey(T model);
 	/**
 	 * 更新对象
 	 * @param model

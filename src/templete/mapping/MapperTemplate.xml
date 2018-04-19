@@ -119,6 +119,12 @@
     where ${p.pk_name} = #${"{id"},jdbcType=${p.pk_obj_type?upper_case}}
   </delete>
   
+  <!-- 根据主键删除对象返回影响数据条数 -->    
+  <delete id="deleteEntryByPrimaryKey" parameterType="java.lang.${p.pk_type}">
+  	delete from ${p.table_name}
+    where ${p.pk_name} = #${"{id"},jdbcType=${p.pk_obj_type?upper_case}}
+  </delete>
+  
    <!-- 清空表数据 -->    
   <delete id="deleteAll" parameterType="java.lang.${p.pk_type}" >
     delete from ${p.table_name}
@@ -190,5 +196,18 @@
     </#list>
     where ${p.pk_name} = #${"{id"},jdbcType=${p.pk_obj_type?upper_case}}
   </update>
-  	 	
+  
+  <!-- 更新对象返回更新影响条数 -->
+  <update id="updateEntryByPrimaryKey" parameterType="${p.basePackage}.entity.${p.bizPackage}.${p.className}">
+  	update ${p.table_name}
+    set 
+  <#list p.gci_columns?sort_by("ordinal_position") as u>
+    	<#if u.clumn_name=="id"><#else>
+    	<if test="${u.javaColumnFileNameCode} != null" >
+    	<#if !u_has_next>${u.clumn_name} = #${"{"+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"}<#else>${u.clumn_name} = #${"{"+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"},</#if>    	
+    	</if>
+    	</#if>
+    </#list>
+    where ${p.pk_name} = #${"{id"},jdbcType=${p.pk_obj_type?upper_case}}
+  </update>
 </mapper>   

@@ -21,6 +21,12 @@ public interface BaseMybatisService <T,PK extends Serializable> {
 	 * @param id
 	 */
 	public void deleteByPrimaryKey(PK id);
+	/**
+	 * 删除返回删除数据条数
+	 * @param id
+	 * @return
+	 */
+	public Integer deleteEntryByPrimaryKey(PK id);
 	
 	/**
 	 * 保存对象
@@ -51,6 +57,13 @@ public interface BaseMybatisService <T,PK extends Serializable> {
 	 * @param model
 	 */
 	public void updateByPrimaryKey(T model);
+	
+	/**
+	 * 更新对象返回被操作记录条数
+	 * @param model
+	 * @return
+	 */
+	public Integer updateEntryByPrimaryKey(T model);
 	
 	/**
 	 * 获取该表所有数据
