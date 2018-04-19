@@ -37,19 +37,19 @@
        	 	and ${u.clumn_name} like CONCAT('%',#${"{vo."+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"},'%')
      	 </if>
      	<#elseif u.column_javatype=="Long">
-     	<if test="vo.${u.clumn_name} != null and vo.${u.clumn_name} != ''" >
+     	<if test="vo.${u.javaColumnFileNameCode} != null and vo.${u.javaColumnFileNameCode} != ''" >
        	 	and ${u.clumn_name} = #${"{vo."+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
      	 </if>
      	<#elseif u.column_javatype=="int">
-     	<if test="vo.${u.clumn_name} != null and vo.${u.clumn_name} != ''" >
+     	<if test="vo.${u.javaColumnFileNameCode} != null and vo.${u.javaColumnFileNameCode} != ''" >
        	 	and ${u.clumn_name} = #${"{vo."+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
      	 </if>
      	 <#elseif u.column_javatype=="long">
-     	<if test="vo.${u.clumn_name} != null and vo.${u.clumn_name} != ''" >
+     	<if test="vo.${u.javaColumnFileNameCode} != null and vo.${u.javaColumnFileNameCode} != ''" >
        	 	and ${u.clumn_name} = #${"{vo."+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
      	 </if>
   	    <#else>
-      	 <if test="vo.${u.clumn_name} != null" >
+      	 <if test="vo.${u.javaColumnFileNameCode} != null" >
        	 	and ${u.clumn_name} = #${"{vo."+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
      	 </if>
      	 </#if>
@@ -161,9 +161,16 @@
     <set>
       <#list p.gci_columns?sort_by("ordinal_position") as u>
       	<#if u.clumn_name=="id"><#else>
+      	<#if !u_has_next>
+      	<if test="${u.javaColumnFileNameCode} != null" >
+        	${u.clumn_name} = #${"{"+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"}
+      	</if>
+      	<#else>
       	<if test="${u.javaColumnFileNameCode} != null" >
         	${u.clumn_name} = #${"{"+u.javaColumnFileNameCode},jdbcType=${u.column_javaMybatintype?upper_case+"}"},
       	</if>
+      	</#if>
+      	
       	</#if>
       </#list>
     </set>

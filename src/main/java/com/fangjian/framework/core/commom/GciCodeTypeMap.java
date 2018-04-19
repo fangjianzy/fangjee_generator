@@ -41,7 +41,7 @@ public class GciCodeTypeMap {
 		    tp.put("date", "java.util.Date");
 		    tp.put("long", "Float");
 		    tp.put("bigint", "long");
-		    tp.put("char", "char");
+		    tp.put("char", "Character");
 		    tp.put("datetime", "java.util.Date");
 		    tp.put("varchar", "String");
 		    tp.put("float", "Double");
