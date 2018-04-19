@@ -123,4 +123,12 @@ public class ${p.className}ServiceImpl implements ${p.className}Service {
 	public PageInfo findPageInfoBySQL(int currentPage, int pageSize,${p.className}Query vo) {
 		return this.${p.lowerName}dao.findPageInfoBySQL(currentPage, pageSize, vo);
 	}
+	
+	public Integer deleteEntryByPrimaryKey(Integer id) {
+		return this.${p.lowerName}dao.deleteEntryByPrimaryKey(id);
+	}
+
+	public Integer updateEntryByPrimaryKey(${p.className} model) {
+		return this.${p.lowerName}dao.updateEntryByPrimaryKey(model);
+	}
 }
