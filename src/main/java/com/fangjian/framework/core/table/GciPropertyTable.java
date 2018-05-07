@@ -71,11 +71,11 @@ public class GciPropertyTable {
     			table.setMsg(table.getColumn_comment()+"只能输入整数");
     		}else if("date".equals(ret.getString("DATA_TYPE"))){
     			table.setRequire("true");
-    			table.setRequireClass("date validate[required,custom[date]]");
+    			table.setRequireClass("date validate[required,custom[date]]  dateFmt='yyyy-MM-dd'");
     			table.setMsg(table.getColumn_comment()+"只允许输入日期");
     		}else if("timestamp".equals(ret.getString("DATA_TYPE"))){
     			table.setRequire("true");
-    			table.setRequireClass("date validate[required,custom[date]]");
+    			table.setRequireClass("date validate[required,custom[date]] dateFmt='yyyy-MM-dd HH:mm:ss'");
     			table.setMsg(table.getColumn_comment()+"只允许输入日期");
     		}else if("double".equals(ret.getString("DATA_TYPE"))){
     			table.setRequire("true");
