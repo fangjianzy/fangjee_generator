@@ -15,10 +15,10 @@ public class ${p.className} implements java.io.Serializable{
  	/**
  	* ${u.column_comment}
  	*/
- 	<#if u.column_javatype == 'java.util.Date' and u.data_type == 'datetime'>
+ 	<#if u.column_javatype == 'java.util.Date' && u.data_type == 'datetime'>
  	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
  	</#if>
- 	<#if u.column_javatype == 'java.util.Date' and u.data_type == 'date'>
+ 	<#if u.column_javatype == 'java.util.Date' && u.data_type == 'date'>
  	@DateTimeFormat(pattern = "yyyy-MM-dd")
  	</#if>
    	private ${u.column_javatype} ${u.javaColumnFileNameCode};
