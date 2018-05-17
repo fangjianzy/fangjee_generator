@@ -11,6 +11,7 @@ import ${p.basePackage}.entity.${p.bizPackage}.${p.className};
 import ${p.basePackage}.query.${p.bizPackage}.${p.className}Query;
 import com.fangjian.framework.common.PageInfo;
 import com.fangjian.framework.common.util.UuidUtil;
+import com.github.pagehelper.PageHelper;
 /**
  * 
  * 描述:${p.code_name}接口具体实现</br>
@@ -130,5 +131,18 @@ public class ${p.className}ServiceImpl implements ${p.className}Service {
 
 	public Integer updateEntryByPrimaryKey(${p.className} model) {
 		return this.${p.lowerName}dao.updateEntryByPrimaryKey(model);
+	}
+	
+	@Override
+	public com.github.pagehelper.PageInfo<${p.className}> getLists(Integer pageNum,Integer pageSize) {
+	    //进行初始化
+	    pageNum = pageNum == null?1:pageNum;
+	    pageSize = pageSize == null?10:pageSize;
+	    PageHelper.startPage(pageNum, pageSize);
+	    //具体根据vo对象进行查询，这里为了测试，不传参数查询了
+	    List<${p.className}> list = this.tmsSystemLogdao.findAll();
+	    //TODO 具体根据vo对象进行查询，这里为了测试，不传参数查询了
+	    com.github.pagehelper.PageInfo<${p.className}> page = new com.github.pagehelper.PageInfo<${p.className}>(list);
+	    return page;
 	}
 }

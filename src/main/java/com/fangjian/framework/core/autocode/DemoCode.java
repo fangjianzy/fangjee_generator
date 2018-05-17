@@ -34,12 +34,12 @@ public class DemoCode {
 		cfg.setBasePackage("com.anfachina.tms");
 		
 		//模块包,同一模块这个地方不需要修改,，比如系统管理模块，设备管理模块
-		cfg.setBizPackage("menu");
+		cfg.setBizPackage("system");
 		//mvc:com.jiesai.framework.controller.iemsuser;
 		//要生成的表名称
-		cfg.setTable_name("tms_truck");
+		cfg.setTable_name("tms_system_log");
 		//表中文名称
-		cfg.setCode_name("车辆管理");
+		cfg.setCode_name("系统运行日志");
 		//在硬盘路径下输出
 		cfg.setOutput_path("D:\\generator-output\\gci_test");
 		
@@ -54,7 +54,8 @@ public class DemoCode {
 		cfg.setSpring_junit_test(SpringCfg.SRPING_TEST_DISABLED);
 		
 		cfg.setJspVsersion(SpringCfg.JSP_VERSION_QUIV3);
-		
+		//只生成rest api
+		cfg.setRestApiController(true);
 		//代码生成核心类
 		CodeFactory.codeGenerate(cfg);
 		

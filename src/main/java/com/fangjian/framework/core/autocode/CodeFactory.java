@@ -92,7 +92,8 @@ public class CodeFactory {
 					cg.setPath(code_package_path+"/controller"+"/"+cfg.getBizPackage());
 					cg.setTemplete_path("web\\springmvc");
 					String springMvcController_File= code_package_path+"/controller"+"/"+cfg.getBizPackage()+"/"+entityName+"Controller.java";
-					cg.setFilename(springMvcController_File);
+					String springMvcController_REST= code_package_path+"/controller"+"/"+cfg.getBizPackage()+"/"+entityName+"RestApiController.java";
+					
 					//设置数据
 					Map<String, Object>  m = new HashMap<String, Object>();
 					GciTempData temp  = new GciTempData();
@@ -112,7 +113,27 @@ public class CodeFactory {
 					temp.setCode_name(cfg.getCode_name());
 					m.put("p", temp);
 					cg.setDatas(m);
-					CodeFactory.genAutoCodeByTempleteName(cg, "ControllerTemplate.ftl");
+					//如果只生成rest api
+					if(cfg.isRestApiController()){
+						cg.setFilename(springMvcController_REST);
+						log.info("生成restapi");
+						CodeFactory.genAutoCodeRESTAPIByTempleteName(cg, "RestControllerTemplate.ftl");
+						log.info("生成dto:"+entityName);
+						genAutoEntityDtoCode(cfg, code_package_path, entityName,list);
+					}else{
+						cg.setFilename(springMvcController_File);
+						log.info("生成普通controller");
+						CodeFactory.genAutoCodeByTempleteName(cg, "ControllerTemplate.ftl");
+						
+						log.info("生成jsp:"+entityName);
+						genAutoSpringMvcListJspCode(cfg, code_package_path, entityName, list, pk_type,pkobj);
+						genAutoSpringMvcListJspAddCode(cfg, code_package_path, entityName, list, pk_type,pkobj);
+						genAutoSpringMvcJspeditCode(cfg, code_package_path, entityName, list, pk_type,pkobj);
+						genAutoSpringMvcJspViewCode(cfg, code_package_path, entityName, list, pk_type,pkobj);
+					}
+					
+					
+					
 					log.info("生成实体:"+entityName);
 					genAutoEntityCode(cfg, code_package_path, entityName,list);
 					genAutoEntityQueryCode(cfg, code_package_path, entityName,list);
@@ -124,11 +145,8 @@ public class CodeFactory {
 					genAutoDaoCode(cfg, code_package_path, entityName, pk_type);
 					log.info("生成mapping:"+entityName);
 					genAutoDaoImplCode(cfg, code_package_path, entityName, list,pk_type,pk_obj_type,pkobj);
-					log.info("生成jsp:"+entityName);
-					genAutoSpringMvcListJspCode(cfg, code_package_path, entityName, list, pk_type,pkobj);
-					genAutoSpringMvcListJspAddCode(cfg, code_package_path, entityName, list, pk_type,pkobj);
-					genAutoSpringMvcJspeditCode(cfg, code_package_path, entityName, list, pk_type,pkobj);
-					genAutoSpringMvcJspViewCode(cfg, code_package_path, entityName, list, pk_type,pkobj);
+					
+					
 					if(SpringCfg.SRPING_TEST_ENABLED.equals(cfg.getSpring_junit_test())){
 						log.info("生成springtest:"+entityName+"Servicetest");
 						genAutoSpringJuntiTestCode(cfg, code_package_path, entityName, list, pk_type);
@@ -147,6 +165,61 @@ public class CodeFactory {
 			
 		}
 		
+		private static void genAutoEntityDtoCode(CodeCfg cfg,String code_package_path,String entityName,List<GciTable> columns) throws IOException, TemplateException{
+			Frameworkcfg cg = new Frameworkcfg();
+			cg.setPath(code_package_path+"/dto");
+			cg.setTemplete_path("entity");
+			String entity_File= code_package_path+"/dto/"+entityName+"Dto.java";
+			cg.setFilename(entity_File);
+			//设置数据
+			Map<String, Object>  m = new HashMap<String, Object>();
+			GciTempData temp  = new GciTempData();
+			temp.setBasePackage(cfg.getBasePackage());
+			//实体包
+			temp.setEntityPackage(entityName.toLowerCase());
+			//业务包
+			temp.setBizPackage(cfg.getBizPackage());
+			//类的名称，支持用户自定义，如果默认则系统生成
+			temp.setClassName(entityName);
+			//组装mvc的时候将首字母小写成为controller
+			temp.setLowerName(Tools.toLowerCaseFirstOne(entityName));
+			//模块/表/实体_crud.jsp
+			temp.setTable_name(cfg.getTable_name());
+			temp.setGci_columns(columns);
+			//获取表名称
+			temp.setCode_name(cfg.getCode_name());
+			m.put("p", temp);
+			
+			cg.setDatas(m);
+			CodeFactory.genAutoCodeByTempleteName(cg, "DtoTemplate.ftl");
+			
+		}
+
+		private static void genAutoCodeRESTAPIByTempleteName(Frameworkcfg cg,String templeteName) throws IOException, TemplateException {
+			log.info("生成器开始生产"+templeteName);
+			//获取模板路径
+			String temppath = System.getProperty("user.dir")+"\\src\\templete\\"+cg.getTemplete_path();
+			
+			Configuration cfg = new Configuration();
+			File f = new File(temppath);
+			cfg.setDirectoryForTemplateLoading(f);
+			
+			Writer writer  = new StringWriter();
+			//加载模板
+			Template temp = cfg.getTemplate(templeteName);
+			//设置模板+数据
+			temp.process(cg.getDatas(), writer);
+			//生成
+			String st = writer.toString();
+		    FileTools.createDir(cg.getPath());
+		    //写文件数据
+		    FileTools.printFile(cg.getFilename(), st);
+		    
+			writer.close();
+			log.info("生成器结束生成"+templeteName);
+			
+		}
+
 		/**
 		 * 生成实体方法
 		 * @throws TemplateException 

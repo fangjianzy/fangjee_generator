@@ -20,6 +20,15 @@ public class CodeCfg {
 	
 	private String jspVsersion;
 	
+	private boolean isRestApiController = false;
+	
+	
+	public boolean isRestApiController() {
+		return isRestApiController;
+	}
+	public void setRestApiController(boolean isRestApiController) {
+		this.isRestApiController = isRestApiController;
+	}
 	/**
 	 * 实体名称，防止默认生成的实体重复，支持默认值,也支持用户自定义
 	 */
