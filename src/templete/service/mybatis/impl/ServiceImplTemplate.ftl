@@ -125,7 +125,7 @@ public class ${p.className}ServiceImpl implements ${p.className}Service {
 		return this.${p.lowerName}dao.findPageInfoBySQL(currentPage, pageSize, vo);
 	}
 	
-	public Integer deleteEntryByPrimaryKey(Integer id) {
+	public Integer deleteEntryByPrimaryKey(${p.pk_type} id) {
 		return this.${p.lowerName}dao.deleteEntryByPrimaryKey(id);
 	}
 
@@ -140,7 +140,7 @@ public class ${p.className}ServiceImpl implements ${p.className}Service {
 	    pageSize = pageSize == null?10:pageSize;
 	    PageHelper.startPage(pageNum, pageSize);
 	    //具体根据vo对象进行查询，这里为了测试，不传参数查询了
-	    List<${p.className}> list = this.tmsSystemLogdao.findAll();
+	    List<${p.className}> list = this.${p.lowerName}dao.findAll();
 	    //TODO 具体根据vo对象进行查询，这里为了测试，不传参数查询了
 	    com.github.pagehelper.PageInfo<${p.className}> page = new com.github.pagehelper.PageInfo<${p.className}>(list);
 	    return page;
