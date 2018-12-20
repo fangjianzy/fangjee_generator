@@ -134,14 +134,12 @@ public class ${p.className}ServiceImpl implements ${p.className}Service {
 	}
 	
 	@Override
-	public com.github.pagehelper.PageInfo<${p.className}> getLists(Integer pageNum,Integer pageSize) {
+	public com.github.pagehelper.PageInfo<${p.className}> getLists(Integer pageNum,Integer pageSize,${p.className}QueryQuery vo) {
 	    //进行初始化
 	    pageNum = pageNum == null?1:pageNum;
 	    pageSize = pageSize == null?10:pageSize;
 	    PageHelper.startPage(pageNum, pageSize);
-	    //具体根据vo对象进行查询，这里为了测试，不传参数查询了
-	    List<${p.className}> list = this.${p.lowerName}dao.findAll();
-	    //TODO 具体根据vo对象进行查询，这里为了测试，不传参数查询了
+	    List<${p.className}> list = this.${p.lowerName}dao.findListByVo(vo);
 	    com.github.pagehelper.PageInfo<${p.className}> page = new com.github.pagehelper.PageInfo<${p.className}>(list);
 	    return page;
 	}

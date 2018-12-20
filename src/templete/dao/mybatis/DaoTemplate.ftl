@@ -13,6 +13,10 @@ import org.apache.ibatis.annotations.Param;
  * 作者：</b>fangjian-代码生成器</br>
  */
 public interface ${p.className}Dao extends BaseMybatisDao<${p.className},${p.pk_type}> {
+	/**
+	* 2018-12-20新增com.github.pagehelper.PageInfo的分页方法实现 by fangjian
+	*/
+	List<${p.className}> findListByVo(@Param("vo") ${p.className}Query vo);
 	//分页数据
 	List<${p.className}> findPageListBySQL(@Param("currentPage") int currentPage,@Param("pageSize") int pageSize,@Param("vo") ${p.className}Query vo);
 	//分页属性

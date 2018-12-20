@@ -17,5 +17,5 @@ public interface ${p.className}Service extends BaseMybatisService<${p.className}
 	//分页属性
 	PageInfo findPageInfoBySQL(int currentPage, int pageSize, ${p.className}Query vo);
 	//pagehelper框架实现的分页  by jimmy.fang
-	com.github.pagehelper.PageInfo<${p.className}> getLists(Integer pageNum,Integer pageSize);
+	com.github.pagehelper.PageInfo<${p.className}> getLists(Integer pageNum,Integer pageSize,${p.className}Query vo);
 }

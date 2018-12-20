@@ -166,9 +166,9 @@ public class ${p.className}Controller extends BaseMybatisController{
 		${p.className} po = this.${p.lowerName}Service.selectByPrimaryKey(vo.getId());
 		<#list p.gci_columns as u>
 		<#if (u.clumn_name=='id')> 
-		//po.set${u.column_getset}(vo.get${u.column_getset}());
+		//po.set${u.javaColumnGetSetFileNameCode}(vo.get${u.javaColumnGetSetFileNameCode}());
 		<#else>
-		po.set${u.column_getset}(vo.get${u.column_getset}());
+		po.set${u.javaColumnGetSetFileNameCode}(vo.get${u.javaColumnGetSetFileNameCode}());
 		</#if>
 		</#list>
 		this.${p.lowerName}Service.updateByPrimaryKeySelective(po);
