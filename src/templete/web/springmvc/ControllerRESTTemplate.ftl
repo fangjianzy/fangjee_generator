@@ -48,7 +48,7 @@ public class ${p.className}Controller extends BaseMybatisController{
 	@RequestMapping("/list") 
 	public ModelAndView  list(HttpServletRequest request,HttpServletResponse response, ${p.className}Query vo) throws Exception{
 		log.info("获取${p.code_name}-分页数据");
-		ModelAndView mv = new ModelAndView("/${p.bizPackage}/${p.entityPackage}/${p.lowerName}_list");
+		ModelAndView mv = new ModelAndView("/${p.bizPackage}/${p.entityPackage}/${p.lowerName?lower_case}_list");
 		int currentPage = 1;
 		int pageSize = 10;
 		if(request.getParameter(GlobalConstant.CURRENT_PAGE) != null){
@@ -78,7 +78,7 @@ public class ${p.className}Controller extends BaseMybatisController{
 	@RequestMapping("/toAdd") 
 	public ModelAndView  toAdd(HttpServletRequest request,HttpServletResponse response) throws Exception{
 		log.info("跳到新增页面-${p.code_name}");
-		ModelAndView mv = new ModelAndView("/${p.bizPackage}/${p.entityPackage}/${p.lowerName}_add");
+		ModelAndView mv = new ModelAndView("/${p.bizPackage}/${p.entityPackage}/${p.lowerName?lower_case}_add");
 		
 		return mv;
 	}
@@ -127,7 +127,7 @@ public class ${p.className}Controller extends BaseMybatisController{
 	@RequestMapping("/findById")
 	public ModelAndView findById(HttpServletRequest request,HttpServletResponse response,@ModelAttribute ${p.className}Query vo)throws Exception{
 		log.info("根据ID查找数据-${p.code_name}");
-		ModelAndView mv = new ModelAndView("/${p.bizPackage}/${p.entityPackage}/${p.lowerName}_view");
+		ModelAndView mv = new ModelAndView("/${p.bizPackage}/${p.entityPackage}/${p.lowerName?lower_case}_view");
 		${p.className} po = this.${p.lowerName}Service.selectByPrimaryKey(vo.getId());
 		mv.addObject(GlobalConstant.ATTRIBUTE_VO, po);
 		return mv;
@@ -144,7 +144,7 @@ public class ${p.className}Controller extends BaseMybatisController{
 	@RequestMapping("/editById")
 	public ModelAndView editById(HttpServletRequest request,HttpServletResponse response,@ModelAttribute ${p.className}Query vo)throws Exception{
 		log.info("根据ID查找更新数据-${p.code_name}");
-		ModelAndView mv = new ModelAndView("/${p.bizPackage}/${p.entityPackage}/${p.lowerName}_edit");
+		ModelAndView mv = new ModelAndView("/${p.bizPackage}/${p.entityPackage}/${p.lowerName?lower_case}_edit");
 		${p.className} po = this.${p.lowerName}Service.selectByPrimaryKey(vo.getId());
 		mv.addObject(GlobalConstant.ATTRIBUTE_VO, po);
 		
