@@ -134,7 +134,7 @@ public class ${p.className}ServiceImpl implements ${p.className}Service {
 	}
 	
 	@Override
-	public com.github.pagehelper.PageInfo<${p.className}> getLists(Integer pageNum,Integer pageSize,${p.className}QueryQuery vo) {
+	public com.github.pagehelper.PageInfo<${p.className}> getLists(Integer pageNum,Integer pageSize,${p.className}Query vo) {
 	    //进行初始化
 	    pageNum = pageNum == null?1:pageNum;
 	    pageSize = pageSize == null?10:pageSize;
